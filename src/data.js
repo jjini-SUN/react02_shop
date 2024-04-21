@@ -2,7 +2,7 @@ let data = [
   {
     id:0,
     title:'아이쉐도우',
-    content:'UV 차단 30',
+    content:'봄웜에 찰떡!',
     price:8000
   },
   {
