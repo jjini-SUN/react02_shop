@@ -17,6 +17,12 @@ let data = [
     content:'피부 자극 전혀 없음',
     price:6000
   },
+  {
+    id:3,
+    title:'로고',
+    content:'로고 있음',
+    price:1000
+  }
 ];
 let num1 = 1;
 let num2 = 2;

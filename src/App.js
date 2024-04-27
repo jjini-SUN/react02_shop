@@ -2,7 +2,7 @@ import logo from './logo.svg';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Container, Col, Row, Nav, Navbar, Button} from 'react-bootstrap'
 import './App.css';
-import {Routes, Route, useNavigate} from 'react-router-dom';
+import {Routes, Route, useNavigate, Outlet, Link} from 'react-router-dom';
 import { useState } from 'react';
 import DetailPage from './pages/Detail.js';
 
@@ -20,8 +20,8 @@ import mainBG from './배너.jpg';  //이미지 import
 //라우터는 창을 새로 불러오는게 아니라 재렌더링 방식을 사용
 function App() {
 
-  let [items, setItems] = useState(data);  //data는 변수니깐 state로
-  let [photo, setphoto] = useState(['/아이쉐도우.jpg', '/립스틱.jpg', '/브러쉬.jpg']);  //useState import
+  let [items, setItems] = useState(data);  //data는 변수니깐 state로 {data => items}
+  let [photo, setphoto] = useState(['/아이쉐도우.jpg', '/립스틱.jpg', '/브러쉬.jpg', '/logo192.png']);  //useState import
   let navigate = useNavigate()
 
 
@@ -61,8 +61,20 @@ function App() {
             {/* <Button variant="primary">Buy Now</Button>{' '} */}
           </>
         }></Route>
-        <Route path='/detail' element={<DetailPage items={items}/>}></Route>
+
+        {/* id ==> URL 파라미터(변수)를 통해서 상세아이템 변경 */}
+
+        <Route path='/detail/:id' element={<DetailPage items={items} img={photo}/>}></Route>
+
+        <Route path='/about' element={<AboutPage></AboutPage>}>
+          <Route path = 'address' element={<div>주소</div>}></Route>
+          <Route path = 'location' element={<div>위치</div>}></Route>
+        </Route>
+        <Route path='*' element={<div>그 외의 페이지</div>}></Route>
       </Routes>
+
+        {/* 리액트는 하나의 html을 다시 그리는 방식이기 때문에 html을 이동하는 <a>태그 보다는 <Link>를 사용</a> */}
+      <Link to='/about/address'><Button variant = 'warning'>리액트 부트스트랩 버튼</Button></Link>
 
 
       {/* data개수와 image가 바뀔 수 있으니까 useState 처리
@@ -98,6 +110,20 @@ function ItemCol(Props)
             <h4>{Props.data.title}</h4>
             <p>{Props.data.price} 원</p>
           </Col>
+    </>
+  )
+}
+
+
+//어바웃페이지의 컴포넌트
+function AboutPage() {
+  return(
+    <>
+    <div>
+      <h4>어바웃 페이지</h4>
+      <Outlet/>
+      {/* Outlet으로 중첩Route 위치를 결정 */}
+    </div>
     </>
   )
 }
