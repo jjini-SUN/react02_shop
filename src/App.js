@@ -16,6 +16,7 @@ import {num1, num2, num3} from './data.js'
 
 //이미지를 사용하려면  import
 import mainBG from './배너.jpg';  //이미지 import
+import Cart from './pages/Cart.js';
 
 //라우터는 창을 새로 불러오는게 아니라 재렌더링 방식을 사용
 function App() {
@@ -35,8 +36,9 @@ function App() {
           </Navbar.Brand>
           <Nav className="me-auto">
             <Nav.Link onClick={()=>{navigate('/')}}>홈</Nav.Link>
-            <Nav.Link onClick={()=>{navigate('/detail')}}>상세페이지</Nav.Link>
+            <Nav.Link onClick={()=>{navigate('/detail/0')}}>상세페이지</Nav.Link>
             <Nav.Link onClick={()=>{navigate('/about')}}>About</Nav.Link>
+            <Nav.Link onClick={()=>{navigate('/cart')}}>장바구니</Nav.Link>
             <Nav.Link onClick={()=>{navigate(-1)}}>뒤로가기</Nav.Link>
             <Nav.Link onClick={()=>{navigate(1)}}>앞으로가기</Nav.Link>
           </Nav>
@@ -70,6 +72,7 @@ function App() {
           <Route path = 'address' element={<div>주소</div>}></Route>
           <Route path = 'location' element={<div>위치</div>}></Route>
         </Route>
+        <Route path='/cart' element={<Cart/>}></Route>
         <Route path='*' element={<div>그 외의 페이지</div>}></Route>
       </Routes>
 
